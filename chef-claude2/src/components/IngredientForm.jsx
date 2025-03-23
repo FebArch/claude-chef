@@ -4,10 +4,14 @@ export default function IngredientForm() {
 
     let [ingdList, addIngd] = React.useState([])
 
-    function addIngredient(e) {
-        e.preventDefault()
-        let ingredientName = document.querySelector("#ingredientName").value
+    function addIngredient(formData) {
+        // e.preventDefault()
+        // let ingredientName = document.querySelector("#ingredientName").value
         
+        // console.log(typeof formData)  // formData.ingredient will not work!!!
+
+        let ingredientName = formData.get('ingredientName')
+
         addIngd((prevVal)=>{
             return [...prevVal, ingredientName]
         })
@@ -21,7 +25,8 @@ export default function IngredientForm() {
         <div className="container">
 
             <div className="input-group my-5 d-flex justify-content-center align-items-center">
-                <form className='w-75' onSubmit={addIngredient}>
+                {/* <form className='w-75' onSubmit={addIngredient}> */}
+                <form action={addIngredient}>
                     <div className="input-group mb-3">
                         <input type="text" className="form-control" name="ingredientName" placeholder="eg. tomato" aria-label="Ingredient's name" aria-describedby="Ingredients-addon2" id='ingredientName' />
                         <button className="btn btn-dark" type="submit" id="button-addon2">+ Add Ingredient</button>
